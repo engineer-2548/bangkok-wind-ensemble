@@ -141,6 +141,27 @@
                     
                     <!-- Card Body -->
                     <div class="p-8 space-y-6">
+                        <!-- Event Image -->
+                        <div class="mb-6 overflow-hidden rounded-xl shadow-lg relative">
+                            <div id="imageLoader" class="absolute inset-0 bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+                                <i class="fas fa-spinner fa-spin text-4xl text-gray-400"></i>
+                            </div>
+                            <img src="https://lh5.googleusercontent.com/d/19no_IIB3LP6T14yVBl4FR80dG8Mqbock" 
+                                 alt="Bangkok Wind Ensemble Event" 
+                                 class="w-full h-auto object-cover transform hover:scale-110 transition-transform duration-500 cursor-pointer"
+                                 onclick="openLightbox(this.src)"
+                                 onload="document.getElementById('imageLoader').style.display='none';"
+                                 onerror="this.style.display='none'; document.getElementById('imageError').style.display='block'; document.getElementById('imageLoader').style.display='none';">
+                            <div id="imageError" class="hidden bg-gray-200 dark:bg-gray-700 p-12 text-center">
+                                <i class="fas fa-image text-6xl text-gray-400 mb-4"></i>
+                                <p class="text-gray-600 dark:text-gray-400">ไม่สามารถโหลดรูปภาพได้</p>
+                            </div>
+                        </div>
+                        <p class="text-center text-sm text-gray-600 dark:text-gray-400 -mt-4">
+                            <i class="fas fa-hand-pointer mr-1"></i>
+                            คลิกที่รูปเพื่อขยาย
+                        </p>
+                        
                         <!-- Date & Time -->
                         <div class="flex items-center justify-center space-x-4 text-gray-800 dark:text-gray-200">
                             <div class="text-center p-4 bg-purple-100 dark:bg-purple-900 rounded-xl">
@@ -226,7 +247,43 @@
         </div>
     </div>
     
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden flex items-center justify-center p-4">
+        <div class="relative max-w-6xl max-h-full">
+            <img id="lightboxImage" src="" alt="Bangkok Wind Ensemble Event" class="max-w-full max-h-[90vh] object-contain rounded-lg">
+            <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white text-4xl hover:text-gray-300 transition-colors">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+    
     <script>
+        // Lightbox functions
+        function openLightbox(src) {
+            document.getElementById('lightboxImage').src = src;
+            document.getElementById('lightbox').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+        
+        // Close lightbox on background click
+        document.getElementById('lightbox').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeLightbox();
+            }
+        });
+        
+        // Close lightbox on ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && !document.getElementById('lightbox').classList.contains('hidden')) {
+                closeLightbox();
+            }
+        });
+        
         // Dark Mode Toggle
         const darkModeToggle = document.getElementById('darkModeToggle');
         const html = document.documentElement;
