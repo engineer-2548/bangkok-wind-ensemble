@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bangkok Wind Ensemble - งานแสดงดนตรี</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap');
+        
+        * {
+            font-family: 'Kanit', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .dark .gradient-bg {
+            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+        }
+        
+        .music-note {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+        
+        .pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+        
+        .slide-in {
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .bounce {
+            animation: bounce 1s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .rotate {
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .glow {
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.6);
+        }
+        
+        .dark .glow {
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+        
+        .instrument-icon {
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .instrument-icon:hover {
+            transform: scale(1.3) rotate(15deg);
+        }
+    </style>
+</head>
+<body class="min-h-screen transition-colors duration-300">
+    <div id="app" class="gradient-bg min-h-screen">
+        <!-- Dark Mode Toggle -->
+        <div class="fixed top-4 right-4 z-50">
+            <button id="darkModeToggle" class="bg-white dark:bg-gray-800 p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 glow">
+                <i class="fas fa-moon dark:hidden text-gray-800"></i>
+                <i class="fas fa-sun hidden dark:block text-yellow-400"></i>
+            </button>
+        </div>
+        
+        <!-- Floating Music Notes Background -->
+        <div class="fixed inset-0 overflow-hidden pointer-events-none">
+            <div class="music-note absolute top-10 left-10 text-6xl opacity-20 text-white">🎵</div>
+            <div class="music-note absolute top-20 right-20 text-4xl opacity-20 text-white" style="animation-delay: 1s;">🎶</div>
+            <div class="music-note absolute bottom-20 left-20 text-5xl opacity-20 text-white" style="animation-delay: 2s;">🎼</div>
+            <div class="music-note absolute bottom-10 right-10 text-7xl opacity-20 text-white" style="animation-delay: 0.5s;">🎺</div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="container mx-auto px-4 py-8 relative z-10">
+            <!-- Header -->
+            <header class="text-center mb-12 fade-in">
+                <div class="mb-6">
+                    <span class="instrument-icon text-6xl">🎼</span>
+                    <span class="instrument-icon text-6xl mx-2">🎺</span>
+                    <span class="instrument-icon text-6xl">🎷</span>
+                </div>
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 slide-in">
+                    Bangkok Wind Ensemble
+                </h1>
+                <p class="text-xl md:text-2xl text-white/90">
+                    การแสดงผลงานดนตรีเครื่องเป่า
+                </p>
+            </header>
+            
+            <!-- Event Card -->
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl overflow-hidden transform hover:scale-105 transition-all duration-300 fade-in">
+                    <!-- Card Header -->
+                    <div class="bg-gradient-to-r from-purple-600 to-indigo-600 dark:from-purple-800 dark:to-indigo-800 p-6 text-white">
+                        <h2 class="text-2xl md:text-3xl font-bold flex items-center justify-center">
+                            <i class="fas fa-music mr-3 bounce"></i>
+                            งานแสดงดนตรีประจำปี
+                        </h2>
+                    </div>
+                    
+                    <!-- Card Body -->
+                    <div class="p-8 space-y-6">
+                        <!-- Date & Time -->
+                        <div class="flex items-center justify-center space-x-4 text-gray-800 dark:text-gray-200">
+                            <div class="text-center p-4 bg-purple-100 dark:bg-purple-900 rounded-xl">
+                                <i class="fas fa-calendar-alt text-3xl text-purple-600 dark:text-purple-400 mb-2"></i>
+                                <p class="font-semibold">วันอาทิตย์ที่ 27</p>
+                                <p class="text-lg">กรกฎาคม 2568</p>
+                            </div>
+                            <div class="text-center p-4 bg-indigo-100 dark:bg-indigo-900 rounded-xl">
+                                <i class="fas fa-clock text-3xl text-indigo-600 dark:text-indigo-400 mb-2"></i>
+                                <p class="font-semibold">เวลา</p>
+                                <p class="text-2xl">15:00 น.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Location -->
+                        <div class="bg-gray-100 dark:bg-gray-700 rounded-xl p-6">
+                            <div class="flex items-center justify-center mb-3">
+                                <i class="fas fa-map-marker-alt text-2xl text-red-500 mr-3"></i>
+                                <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">สถานที่จัดงาน</h3>
+                            </div>
+                            <p class="text-center text-gray-700 dark:text-gray-300">
+                                ห้องอเนกประสงค์ ชั้น 1<br>
+                                หอศิลปวัฒนธรรมแห่งกรุงเทพมหานคร
+                            </p>
+                        </div>
+                        
+                        <!-- Free Entry Badge -->
+                        <div class="text-center">
+                            <div class="inline-block bg-green-500 text-white px-8 py-4 rounded-full text-xl font-bold pulse">
+                                <i class="fas fa-ticket-alt mr-2"></i>
+                                เข้าชมฟรี! ไม่มีค่าใช้จ่าย
+                            </div>
+                        </div>
+                        
+                        <!-- Organizer Info -->
+                        <div class="border-t pt-6 mt-6">
+                            <p class="text-center text-gray-600 dark:text-gray-400 text-sm">
+                                จัดโดย: กองการสังคีต สำนักวัฒนธรรม กีฬา และการท่องเที่ยว<br>
+                                โดย ศูนย์ฝึกดนตรี กรุงเทพมหานคร
+                            </p>
+                        </div>
+                        
+                        <!-- Instruments Display -->
+                        <div class="flex justify-center space-x-4 text-4xl mt-6">
+                            <span class="instrument-icon">🎺</span>
+                            <span class="instrument-icon">🎷</span>
+                            <span class="instrument-icon">📯</span>
+                            <span class="instrument-icon">🪈</span>
+                            <span class="instrument-icon">🥁</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Card Footer -->
+                    <div class="bg-gray-100 dark:bg-gray-700 p-6">
+                        <div class="flex flex-wrap justify-center gap-2 text-sm">
+                            <span class="bg-purple-200 dark:bg-purple-800 text-purple-800 dark:text-purple-200 px-3 py-1 rounded-full">
+                                #งานบริการวิชาการด้านดนตรี
+                            </span>
+                            <span class="bg-indigo-200 dark:bg-indigo-800 text-indigo-800 dark:text-indigo-200 px-3 py-1 rounded-full">
+                                #ศูนย์ฝึกดนตรี
+                            </span>
+                            <span class="bg-blue-200 dark:bg-blue-800 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full">
+                                #กรุงเทพมหานคร
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Call to Action -->
+            <div class="text-center mt-12 fade-in">
+                <button class="bg-white dark:bg-gray-800 text-purple-600 dark:text-purple-400 px-8 py-4 rounded-full text-xl font-bold shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 glow">
+                    <i class="fas fa-share-alt mr-2"></i>
+                    แชร์กิจกรรมนี้
+                </button>
+            </div>
+        </div>
+        
+        <!-- Animated Background Circles -->
+        <div class="fixed inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute -top-40 -right-40 w-80 h-80 bg-white/10 rounded-full rotate"></div>
+            <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-white/10 rounded-full rotate" style="animation-duration: 30s;"></div>
+        </div>
+    </div>
+    
+    <script>
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const html = document.documentElement;
+        
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'true') {
+            html.classList.add('dark');
+        }
+        
+        darkModeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            localStorage.setItem('darkMode', html.classList.contains('dark'));
+            
+            // Add rotation animation to toggle button
+            darkModeToggle.style.transform = 'rotate(360deg)';
+            setTimeout(() => {
+                darkModeToggle.style.transform = 'rotate(0deg)';
+            }, 300);
+        });
+        
+        // Share functionality
+        document.querySelector('button:last-of-type').addEventListener('click', () => {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Bangkok Wind Ensemble - งานแสดงดนตรี',
+                    text: 'ขอเชิญชมการแสดง Bangkok Wind Ensemble วันอาทิตย์ที่ 27 กรกฎาคม 2568 เวลา 15:00 น. ที่หอศิลปวัฒนธรรมแห่งกรุงเทพมหานคร เข้าชมฟรี!',
+                    url: window.location.href
+                }).catch(console.error);
+            } else {
+                // Fallback for browsers that don't support Web Share API
+                alert('คัดลอกลิงก์: ' + window.location.href);
+            }
+        });
+        
+        // Add parallax effect on mouse move
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            document.querySelectorAll('.music-note').forEach((note, index) => {
+                const speed = (index + 1) * 5;
+                note.style.transform = `translateX(${x * speed}px) translateY(${y * speed}px)`;
+            });
+        });
+        
+        // Add intersection observer for fade-in animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                }
+            });
+        });
+        
+        document.querySelectorAll('.fade-in').forEach(el => {
+            el.style.opacity = '0';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
